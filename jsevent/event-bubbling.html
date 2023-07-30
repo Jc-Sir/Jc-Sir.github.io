@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件冒泡</title>
+    <style>
+        #box {
+            width: 300px;
+            height: 300px;
+            background: rgb(99, 196, 131);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script type="text/javascript">
+        // 事件冒泡：事件开始时由最具体的元素接受，然后逐级向上传播到较为不具体的节点（文档）
+        // 【取决于Dom的嵌套关系】事件沿DOM树向上传播
+        // 注意：所有现代浏览器都支持事件冒泡，但在具体实现在还是有一些差别。IE9、Firefox、Chrome、Safari将事件一直冒泡到window对象
+        var box = document.getElementById('box');
+        box.onclick = function() {
+            box.innerHTML = null;
+            box.innerHTML += 'div\n';
+        }
+        document.body.onclick = function() {
+            box.innerHTML += 'body\n';
+        }
+        document.documentElement.onclick = function() {
+            box.innerHTML += 'html\n';
+        }
+        document.onclick = function() {
+            box.innerHTML += 'document\n';
+        }
+        window.onclick = function() {
+            box.innerHTML += 'window    \n';
+        }
+    </script>
+</body>
+
+
+</html>

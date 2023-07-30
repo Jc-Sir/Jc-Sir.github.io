@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件捕获</title>
+    <style>
+        #box {
+            width: 300px;
+            height: 300px;
+            background: rgb(99, 196, 131);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script type="text/javascript">
+        // 在事件捕获过程中，document对象首先接收到click事件，然后事件沿DOM树依次向下，一直传播到事件的实际目标，即<div>元素
+        var box = document.getElementById('box');
+        box.addEventListener('click', function() {
+            box.innerHTML += 'div\n';
+        }, true)
+        document.body.addEventListener('click', function() {
+            box.innerHTML += 'body\n';
+        }, true)
+        document.documentElement.addEventListener('click', function() {
+            box.innerHTML += 'html\n';
+        }, true)
+        document.addEventListener('click', function() {
+            box.innerHTML += 'document\n';
+        }, true)
+        window.addEventListener('click', function() {
+            box.innerHTML = null;
+            box.innerHTML += 'window    \n';
+        }, true)
+    </script>
+</body>
+
+
+</html>
